@@ -1,0 +1,133 @@
+/* 1. Reset Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #6366f1;
+    --bg-body: #f1f5f9;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --item-bg: #f8fafc;
+    --input-border: #e2e8f0;
+}
+
+body.dark-mode {
+    --bg-body: #0f172a;
+    --bg-card: #1e1e1e;
+    --text-main: #f1f5f9;
+    --item-bg: #2d3748;
+    --input-border: #4a5568;
+}
+
+/* 2. Layout do Body (Centralização Real) */
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh;
+    transition: background 0.3s ease;
+    padding: 20px;
+}
+
+/* 3. O Card (Box) */
+.box { 
+    background-color: var(--bg-card);
+    padding: 2.3rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    max-width: 470px;
+    transition: background 0.3s ease, transform 0.2s;
+    position: relative;
+}
+
+h2 {
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    text-align: center;
+    color: var(--primary);
+    font-weight: 800;
+    font-weight: bold;
+}
+
+/* 4. Grupo de Entrada */
+.input-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+}
+
+input {
+    font-weight: bold;
+    flex: 1;
+    padding: 14px;
+    background-color: var(--item-bg);
+    border: 2px solid var(--input-border);
+    color: var(--text-main);
+    border-radius: 12px;
+    outline: none;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-color: var(--primary);
+}
+
+button#addButton {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+    font-weight: bold;
+}
+
+button#addButton:active {
+    transform: scale(0.95);
+}
+#themeBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--input-border);
+    border-radius: 50px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+#tituloTarefa {
+    font-weight: bold
+}
+
+ul { 
+    list-style: none; 
+}
+
+li { 
+    background-color: var(--item-bg);
+    margin-bottom: 12px;
+    padding: 14px; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    border-radius: 12px;
+    border: 1px solid var(--input-border);
+    animation: fadeIn 0.4s ease forwards;
+    transition: all 0.2s ease;
+    font-weight: bold;
+}
