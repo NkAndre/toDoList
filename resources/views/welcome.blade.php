@@ -27,7 +27,7 @@
         <ul id="lstTarefa">
             @foreach($tarefas as $t) 
             <span id="tituloTarefa">{{ $t->tituloTarefa }}
-                <p>Início:{{ $t->dataCriacao }} Conclusão:{{ $t->prazo }}</p>
+                <p>Início:{{ $t->dataCriacao }} Conaaclusão:{{ $t->prazo }}</p>
             </span>
             @endforeach
 
