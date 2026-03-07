@@ -1,42 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To do list</title>
-    <link rel="stylesheet" href="{{url('css/style.css')}}">
-    <script src="{{url('js/script.js')}}"></script>
+       <link rel="stylesheet" href="{{url('css/login2.css')}}">
+    <title>Document</title>
 </head>
-
 <body>
-    
-    <button id="themeBtn">🌙</button>
-
-    <div class="box">
-        <h2>Gerenciador de tarefas</h2>
-
-        <div class="input-group">
-            <input type="text" id="tarefaInput" placeholder="Insira a tarefa">
-            
-            <!--  <input type="date" name="data" value="{{ isset($dataCriacao) ? $dataCriacao->data_nascimento->format('Y-m-d') : old('data_nascimento') }}"> -->
-           
-            
-            <button id="addButton">Adicionar</button>
+    <div class="box-forms">
+    <form action="{{ route('login.auth') }}" method="POST">
+    @csrf
+        <input type="email" name="email" required placeholder="E-mail">
+        <input type="password" name="password" required placeholder="Senha">
+        <button type="submit">Entrar</button>
+        @if(session('erro'))
+        <div style="background-color: #fee2e2; color: #dc2626; padding: 10px; border-radius: 8px; text-align: center; font-size: 0.875rem; border: 1px solid #fecaca;">
+        {{ session('erro') }}
         </div>
-        <ul id="lstTarefa">
-            @foreach($tarefas as $t) 
-            <span id="tituloTarefa">{{ $t->tituloTarefa }}
-                <p>Início:{{ $t->dataCriacao }} Conaaclusão:{{ $t->prazo }}</p>
-            </span>
-            @endforeach
-
-            @foreach($statusItem as $s)
-            <p>Status:{{ $s->valor }}</p>
-            @endforeach
-        </ul>
+        @endif
+    </form> 
     </div>
 
 </body>
-
 </html>

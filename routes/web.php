@@ -1,24 +1,35 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ListController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
+// 1. Redirecionamento Inicial
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
-use App\Http\Controllers\ListController;
 
-Route::get('/', [ListController::class, 'index']);
+// 2. Rotas de Autenticação (Login e Logout)
+Route::get('/login', function () {
+    return view('welcome');
+})->name('login');
 
+Route::post('/login/auth', [ListController::class, 'login'])->name('login.auth');
 
+// Esta é a rota que estava faltando o nome correto!
+Route::post('/logout', [ListController::class, 'logout'])->name('logout');
 
+// 3. Rotas Protegidas (Home e Status)
+Route::get('/home', [ListController::class, 'index'])->name('home');
+
+// Rota de Status corrigida para usar o método indexStatus do Controller
+Route::get('/status', [ListController::class, 'indexStatus'])->name('status.index');
+
+// 4. Manipulação de Tarefas
+Route::post('/tarefa/adicionar', [ListController::class, 'store'])->name('tarefa.store');
+Route::delete('/tarefa/{id}', [ListController::class, 'destroy'])->name('tarefa.destroy');

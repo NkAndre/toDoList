@@ -59,10 +59,21 @@ h2 {
 /* 4. Grupo de Entrada */
 .input-group {
     display: flex;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-bottom: 1.5rem;
 }
 
+/*input type date*/
+input[type="date"] {
+    flex: 1;
+    min-width: 120px; 
+    padding: 10px; /* Reduzi um pouco o padding para caber melhor */
+    font-size: 0.9rem;
+}
+input[type="text"] {
+    flex: 1 1 100%; /* Ocupa 100% da largura do grupo */
+}
 input {
     font-weight: bold;
     flex: 1;
@@ -80,24 +91,24 @@ input:focus {
     border-color: var(--primary);
 }
 
-button#addButton {
+button[type="submit"] {
     background-color: var(--primary);
     color: white;
     border: none;
-    padding: 0 20px;
+    padding: 14px;
     border-radius: 12px;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.1s, opacity 0.2s;
-    font-weight: bold;
+    flex: 1 1 100%; /* Faz o botão ficar embaixo ocupando tudo */
+    transition: transform 0.1s;
 }
 
-button#addButton:active {
-    transform: scale(0.95);
+button[type="submit"]:hover {
+    opacity: 0.9;
 }
 #themeBtn {
     position: fixed;
-    top: 20px;
+    top: 80px;
     right: 20px;
     background: var(--bg-card);
     color: var(--text-main);
@@ -118,16 +129,157 @@ ul {
     list-style: none; 
 }
 
+/* Ajuste na LI para organizar o texto e o botão */
 li { 
     background-color: var(--item-bg);
     margin-bottom: 12px;
-    padding: 14px; 
+    padding: 16px; 
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between; /* Joga o texto pra esquerda e o X pra direita */
     align-items: center;
     border-radius: 12px;
     border: 1px solid var(--input-border);
-    animation: fadeIn 0.4s ease forwards;
-    transition: all 0.2s ease;
+    transition: transform 0.2s;
+}
+
+li:hover {
+    transform: translateX(5px); /* Efeito de deslizar ao passar o mouse */
+}
+
+.tarefa-info strong {
+    display: block;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.tarefa-info p {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: 4px;
+}
+
+/* Botão de Excluir */
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 5px;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.delete-btn:hover {
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 5px rgba(255,0,0,0.3));
+}
+.navbar {
+    width: 100%;
+    padding: 1rem 5%;
+    background: var(--bg-card);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.navbar .logo {
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-main);
+    margin-left: 20px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--primary);
+}
+
+.btn-login {
+    background: var(--primary);
+    color: white !important;
+    padding: 8px 18px;
+    border-radius: 8px;
+}
+
+/* Ajuste o body para o conteúdo não ficar embaixo do header fixo */
+body {
+    padding-top: 100px;
+}
+
+/* Container da Tabela */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Garante que não quebre no celular */
+    margin-top: 10px;
+}
+
+.status-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px; /* Cria um espaço entre as linhas */
+}
+
+.status-table th {
+    background-color: var(--primary);
+    color: white;
+    padding: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* Arredondar cantos do header */
+.status-table th:first-child { border-radius: 10px 0 0 10px; }
+.status-table th:last-child { border-radius: 0 10px 10px 0; }
+
+.status-table td {
+    padding: 15px;
+    text-align: center;
+    background-color: var(--item-bg);
+    color: var(--text-main);
     font-weight: bold;
+    transition: transform 0.2s;
+}
+
+/* Efeito de linha ao passar o mouse */
+.status-table tr:hover td {
+    background-color: var(--input-border);
+    transform: scale(1.01);
+}
+
+/* Estilo da Etiqueta (Badge) */
+.status-badge {
+    background-color: var(--primary);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.status-select {
+    flex: 1;
+    padding: 14px;
+    background-color: var(--item-bg);
+    border: 2px solid var(--input-border);
+    color: var(--text-main);
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+}
+
+.status-select:focus {
+    border-color: var(--primary);
 }
