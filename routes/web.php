@@ -32,4 +32,5 @@ Route::get('/status', [ListController::class, 'indexStatus'])->name('status.inde
 
 // 4. Manipulação de Tarefas
 Route::post('/tarefa/adicionar', [ListController::class, 'store'])->name('tarefa.store');
+
 Route::delete('/tarefa/{id}', [ListController::class, 'destroy'])->name('tarefa.destroy');
