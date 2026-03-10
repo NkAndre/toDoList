@@ -17,7 +17,7 @@ class ListController extends Controller
 
         // 2. Tenta autenticar
         if (Auth::attempt($credenciais)) {
-            // Se der certo, limpa a sessão e vai para a home
+            // Se der certoo, limpa a sessão e vai para a home
             $request->session()->regenerate();
             return redirect()->route('home');
         }
@@ -35,11 +35,10 @@ class ListController extends Controller
     // O index agora carrega o arquivo 'home.blade.php'
   public function index()
     {   
-    // 1. Busca todos os status (isso continua igual para todos)
+ 
     $statusItem = statusModel::all(); 
 
-    // 2. Filtra as tarefas: agora pegamos apenas onde o 'user_id' 
-    // é igual ao ID do usuário autenticado (Andre ou Lucas)
+    
     $tarefas = DB::table('tabela_item')
                 ->where('user_id', Auth::id()) 
                 ->get(); 
@@ -64,7 +63,7 @@ class ListController extends Controller
         'dataCriacao' => $request->dataCriacao,
         'prazo' => $request->prazo,
         'status_id' => $request->status_id,
-        'user_id' => Auth::id(), // Vincula ao Andre ou Lucas aqui
+        'user_id' => Auth::id(), // Vincula ao Andre ou Lucas ou qualquer outro aqui
         'created_at' => now(),
         'updated_at' => now(),
     ]);
@@ -86,7 +85,7 @@ class ListController extends Controller
 
 public function indexStatus()
 {
-    // Mudamos 'status.valorStatus' para 'status.valor' que é o nome real no seu banco
+
     $tarefasComStatus = DB::table('tabela_item')
         ->join('status', 'tabela_item.status_id', '=', 'status.id')
         ->where('tabela_item.user_id', Auth::id())

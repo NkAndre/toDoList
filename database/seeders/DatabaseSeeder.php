@@ -30,6 +30,16 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123456') // senha do lucas
         ]
     );
+
+    User::updateOrCreate(
+        ['email' => 'maria@email.com'], // emaill do maria
+        [
+            'name' => 'maria',     // Nome do maria
+            'password' => Hash::make('123456') // senha do maria
+        ]
+
+        
+    );
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

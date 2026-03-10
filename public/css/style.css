@@ -211,7 +211,7 @@ nav a:hover {
     border-radius: 8px;
 }
 
-/* Ajuste o body para o conteúdo não ficar embaixo do header fixo */
+/
 body {
     padding-top: 100px;
 }
@@ -282,4 +282,15 @@ body {
 
 .status-select:focus {
     border-color: var(--primary);
+}
+
+.forms{
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px
+
+}
+.label-date{
+    font-weight: bold;
 }
