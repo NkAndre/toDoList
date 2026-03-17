@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\statusModel;
+use App\Models\ListModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 class ListController extends Controller
 {
-    // O login agora te leva para a rota 'home'
+    // O login agora ki levaa para a rota 'home'
     public function login(Request $request)
     
     {
-        // 1. Pega apenas o que precisa do formulário
+        // 1. Pega apns o que precisa do formulário
         $credenciais = $request->only('email', 'password');
 
         // 2. Tenta autenticar
@@ -46,6 +47,12 @@ class ListController extends Controller
     // 3. Retorna a view 'home' com as tarefas filtradas
     return view('home', compact('tarefas', 'statusItem'));
     }
+
+    public function indexApi(){
+        $tarefas = listModel::all(); 
+        return $tarefas;
+    }
+
 
     public function store(Request $request)
 {

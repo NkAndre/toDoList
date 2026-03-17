@@ -32,7 +32,8 @@ body {
     align-items: center; 
     min-height: 100vh;
     transition: background 0.3s ease;
-    padding: 20px;
+    padding: 100px;
+    
 }
 
 /* 3. O Card (Box) */
@@ -42,7 +43,7 @@ body {
     border-radius: 20px;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     width: 100%;
-    max-width: 470px;
+    max-width: 420px;
     transition: background 0.3s ease, transform 0.2s;
     position: relative;
 }
