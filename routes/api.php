@@ -18,11 +18,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//rota de API no metodo Get
 Route::get('/tarefas', [ListController::class, 'indexApi']);
 
+//rota de API no metodo POST
 Route::post('/tarefas', [ListController::class, 'storeApi']);
 
+//rota de API no metodo put
 Route::put('/tarefas/{id}', [ListController::class, 'updateApi']);
 
-
+//rota de API no metodo delete
 Route::delete('/tarefas/{id}', [ListController::class, 'destroyApi']);
