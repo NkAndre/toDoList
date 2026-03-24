@@ -134,7 +134,7 @@ class ListController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Tarefa excluída com sucesso!'
+            'message' => 'Task updated successfully'
         ], 200);
     
 
