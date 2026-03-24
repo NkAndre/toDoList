@@ -11,7 +11,7 @@
 
 <body>
     <header class="navbar">
-        <div class="logo">Gerenciador de Tarefas-todoList
+        <div class="logo">Gerenciador de Tarefass-todoList
 
         <!--  -->
             @auth

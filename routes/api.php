@@ -18,4 +18,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/home', [ListController::class, 'indexApi']);
+Route::get('/tarefas', [ListController::class, 'indexApi']);
+
+Route::post('/tarefas', [ListController::class, 'storeApi']);
+
+Route::put('/tarefas/{id}', [ListController::class, 'updateApi']);
+
+
+Route::delete('/tarefas/{id}', [ListController::class, 'destroyApi']);

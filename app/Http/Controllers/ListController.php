@@ -48,11 +48,45 @@ class ListController extends Controller
     return view('home', compact('tarefas', 'statusItem'));
     }
 
+    //get APi ne pae
     public function indexApi(){
         $tarefas = listModel::all(); 
-        return $tarefas;
+        return response () ->json([
+            'success' => true,
+            'count' => $tarefas->count(),
+            'data' =>  $tarefas
+
+        ],200);
     }
 
+    //API DO POST  NE PAE
+  public function storeApi(Request $request)
+{
+    try {
+        $tarefas = new ListModel();
+        
+        $tarefas->tituloTarefa = $request->tituloTarefa; 
+        $tarefas->dataCriacao  = $request->dataCriacao;
+        $tarefas->prazo        = $request->prazo;
+        $tarefas->status_id    = $request->status_id; 
+        $tarefas->user_id      = $request->user_id ?? 1; 
+
+        $tarefas->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Task created successfully',
+            'data' => $tarefas
+        ], 201);
+        
+    } catch (\Exception $e) {
+        
+        return response()->json([
+            'success' => false,
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
 
     public function store(Request $request)
 {
@@ -64,13 +98,15 @@ class ListController extends Controller
         'status_id' => 'required',
     ]);
 
+    
+
     // 2. Faz o insert incluindo o user_id de quem está logado
     DB::table('tabela_item')->insert([
         'tituloTarefa' => $request->tituloTarefa,
         'dataCriacao' => $request->dataCriacao,
         'prazo' => $request->prazo,
         'status_id' => $request->status_id,
-        'user_id' => Auth::id(), // Vincula ao Andre ou Lucas ou qualquer outro aqui
+        'user_id' => Auth::id(), // Vincula ao Andre ou Luqueta ou qualquer outro aqui
         'created_at' => now(),
         'updated_at' => now(),
     ]);
@@ -78,10 +114,11 @@ class ListController extends Controller
     return redirect()->back();
 }
 
+
+
     public function destroy($id)
     {
-    // O where('user_id', Auth::id()) garante que o usuário 
-    // só delete o que pertence ao ID dele.
+ 
     DB::table('tabela_item')
         ->where('id', $id)
         ->where('user_id', Auth::id()) 
@@ -90,6 +127,18 @@ class ListController extends Controller
     return redirect()->back();
     }
 
+    public function destroyApi($id){
+    $tarefas = ListModel::findOrFail($id);
+
+    $tarefas->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Tarefa excluída com sucesso!'
+        ], 200);
+    
+
+    }
 public function indexStatus()
 {
 
@@ -100,5 +149,25 @@ public function indexStatus()
         ->get();
 
     return view('status', compact('tarefasComStatus'));
+}
+
+
+//update de API ne pae
+public function updateApi(Request $request, string $id)
+{
+    $tarefas = ListModel::findOrFail($id);
+    $tarefas->tituloTarefa = $request->tituloTarefa ?? $tarefas->tituloTarefa;
+    $tarefas->dataCriacao= $request->dataCriacao ?? $tarefas->dataCriacao;
+    $tarefas->prazo= $request->prazo ?? $tarefas->prazo;
+    $tarefas->status_id= $request->status_id ?? $tarefas->status_id;
+    $tarefas->save();
+
+    return response() -> json(
+        [
+            "success"=>true,
+            "message" =>'Task updated successfully',
+            'data' => $tarefas
+        ],200
+    );
 }
 }

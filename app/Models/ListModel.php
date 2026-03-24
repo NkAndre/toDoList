@@ -7,11 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class ListModel extends Model
 {
-    
-        protected $table = 'tabela_item'; 
-        protected $fillable = ['tituloTarefa' ,'dataCriacao', 'prazo'];
-    
-    
-    //public $timestamps=false
     use HasFactory;
+
+    protected $table = 'tabela_item'; 
+    
+    
+    protected $fillable = [
+    'tituloTarefa', 
+    'dataCriacao', 
+    'prazo', 
+    'status_id', 
+    'user_id'
+];
+ 
+    public $timestamps = false; 
 }
