@@ -170,4 +170,27 @@ public function updateApi(Request $request, string $id)
         ],200
     );
 }
+
+public function update(Request $request, $id)
+{
+    // Validação básica
+    $request->validate([
+        'tituloTarefa' => 'required',
+        'status_id' => 'required',
+        'prazo' => 'required'
+    ]);
+
+ 
+    DB::table('tabela_item')
+        ->where('id', $id)
+        ->where('user_id', Auth::id())
+        ->update([
+            'tituloTarefa' => $request->tituloTarefa,
+            'status_id' => $request->status_id,
+            'prazo' => $request->prazo,
+            'updated_at' => now(),
+        ]);
+
+    return redirect()->back()->with('sucesso', 'Tarefa atualizada!');
+}
 }

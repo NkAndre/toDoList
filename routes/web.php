@@ -33,3 +33,7 @@ Route::get('/status', [ListController::class, 'indexStatus'])->name('status.inde
 Route::post('/tarefa/adicionar', [ListController::class, 'store'])->name('tarefa.store');
 
 Route::delete('/tarefa/{id}', [ListController::class, 'destroy'])->name('tarefa.destroy');
+
+Route::put('/tarefa/{id}', [ListController::class, 'update'])->name('tarefa.update');
+
+Route::post('/tarefa', [ListController::class, 'store']);

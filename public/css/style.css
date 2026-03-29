@@ -69,11 +69,11 @@ h2 {
 input[type="date"] {
     flex: 1;
     min-width: 120px; 
-    padding: 10px; /* Reduzi um pouco o padding para caber melhor */
+    padding: 10px; 
     font-size: 0.9rem;
 }
 input[type="text"] {
-    flex: 1 1 100%; /* Ocupa 100% da largura do grupo */
+    flex: 1 1 100%; 
 }
 input {
     font-weight: bold;
@@ -100,7 +100,7 @@ button[type="submit"] {
     border-radius: 12px;
     font-weight: bold;
     cursor: pointer;
-    flex: 1 1 100%; /* Faz o botão ficar embaixo ocupando tudo */
+    flex: 1 1 100%; 
     transition: transform 0.1s;
 }
 
@@ -130,13 +130,12 @@ ul {
     list-style: none; 
 }
 
-/* Ajuste na LI para organizar o texto e o botão */
 li { 
     background-color: var(--item-bg);
     margin-bottom: 12px;
     padding: 16px; 
     display: flex;
-    justify-content: space-between; /* Joga o texto pra esquerda e o X pra direita */
+    justify-content: space-between; 
     align-items: center;
     border-radius: 12px;
     border: 1px solid var(--input-border);
@@ -144,7 +143,7 @@ li {
 }
 
 li:hover {
-    transform: translateX(5px); /* Efeito de deslizar ao passar o mouse */
+    transform: translateX(5px); 
 }
 
 .tarefa-info strong {
@@ -212,22 +211,22 @@ nav a:hover {
     border-radius: 8px;
 }
 
-/
+
 body {
     padding-top: 100px;
 }
 
-/* Container da Tabela */
+
 .table-container {
     width: 100%;
-    overflow-x: auto; /* Garante que não quebre no celular */
+    overflow-x: auto; 
     margin-top: 10px;
 }
 
 .status-table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 8px; /* Cria um espaço entre as linhas */
+    border-spacing: 0 8px; 
 }
 
 .status-table th {
@@ -294,4 +293,37 @@ body {
 }
 .label-date{
     font-weight: bold;
+}
+
+
+
+.tarefa-info {
+    flex: 1; 
+    min-width: 0; 
+    margin-right: 10px;
+}
+
+
+.acoes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0; 
+}
+
+.edit-popover {
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--primary);
+    padding: 15px;
+    border-radius: 12px;
+    z-index: 999; 
+    width: 280px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.box {
+    max-width: 480px; 
 }
