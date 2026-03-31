@@ -15,14 +15,22 @@
 
             <!--  -->
             @auth
-                | Olá, {{ Auth::user()->name }}
+            | Olá, {{ Auth::user()->name }}
             @endauth
         </div>
 
         <nav>
             <a href="{{ route('home') }}">Home</a>
-            <a href="{{ url('/status') }}">Status</a>
+            <a href="{{ route('status.index') }}">Status</a>
+
+            @auth
+            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                @csrf
+                <button type="submit" class="btn-logout" style="background:none; border:none; color:red; cursor:pointer;">Sair</button>
+            </form>
+            @else
             <a href="{{ route('login') }}" class="btn-login">Login</a>
+            @endauth
         </nav>
     </header>
 
@@ -41,7 +49,7 @@
                 <select name="status_id" class="status-select" required>
                     <option value="" disabled selected>Selecione o Status</option>
                     @foreach($statusItem as $s)
-                        <option value="{{ $s->id }}">{{ $s->valor }}</option>
+                    <option value="{{ $s->id }}">{{ $s->valor }}</option>
                     @endforeach
                 </select>
 
@@ -64,43 +72,44 @@
         <!-- Listas de tarefas vai começar poe aki -->
         <ul id="lstTarefa">
             @foreach($tarefas as $t)
-                <li style="flex-direction: column; align-items: flex-start;">
-                    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-                        <div class="tarefa-info">
-                            <strong>{{ $t->tituloTarefa }}</strong>
-                            @php $statusDaTarefa = $statusItem->firstWhere('id', $t->status_id); @endphp
-                            <span class="status-tag">{{ $statusDaTarefa ? $statusDaTarefa->valor : 'Sem status' }}</span>
-                            <p>Prazo: {{ $t->prazo }}</p>
-                        </div>
-
-                        <div class="acoes" style="display: flex; gap: 10px;">
-                            <details class="edit-details">
-                                <summary style="list-style: none; cursor: pointer;">📝</summary>
-                                <div class="edit-popover">
-                                    <form action="{{ route('tarefa.update', $t->id) }}" method="POST" class="forms">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="text" name="tituloTarefa" value="{{ $t->tituloTarefa }}" required>
-                                        <select name="status_id" class="status-select">
-                                            @foreach($statusItem as $s)
-                                                <option value="{{ $s->id }}" {{ $t->status_id == $s->id ? 'selected' : '' }}>
-                                                    {{ $s->valor }}</option>
-                                            @endforeach
-                                        </select>
-                                        <input type="date" name="prazo" value="{{ $t->prazo }}" required>
-                                        <button type="submit" style="padding: 8px;">Salvar</button>
-                                    </form>
-                                </div>
-                            </details>
-
-                            <form action="{{ route('tarefa.destroy', $t->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="delete-btn">❌</button>
-                            </form>
-                        </div>
+            <li style="flex-direction: column; align-items: flex-start;">
+                <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                    <div class="tarefa-info">
+                        <strong>{{ $t->tituloTarefa }}</strong>
+                        @php $statusDaTarefa = $statusItem->firstWhere('id', $t->status_id); @endphp
+                        <span class="status-tag">{{ $statusDaTarefa ? $statusDaTarefa->valor : 'Sem status' }}</span>
+                        <p>Prazo: {{ $t->prazo }}</p>
                     </div>
-                </li>
+
+                    <div class="acoes" style="display: flex; gap: 10px;">
+                        <details class="edit-details">
+                            <summary style="list-style: none; cursor: pointer;">📝</summary>
+                            <div class="edit-popover">
+                                <form action="{{ route('tarefa.update', $t->id) }}" method="POST" class="forms">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="text" name="tituloTarefa" value="{{ $t->tituloTarefa }}" required>
+                                    <select name="status_id" class="status-select">
+                                        @foreach($statusItem as $s)
+                                        <option value="{{ $s->id }}" {{ $t->status_id == $s->id ? 'selected' : '' }}>
+                                            {{ $s->valor }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    <input type="date" name="prazo" value="{{ $t->prazo }}" required>
+                                    <button type="submit" style="padding: 8px;">Salvar</button>
+                                </form>
+                            </div>
+                        </details>
+
+                        <form action="{{ route('tarefa.destroy', $t->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="delete-btn">❌</button>
+                        </form>
+                    </div>
+                </div>
+            </li>
             @endforeach
         </ul>
 

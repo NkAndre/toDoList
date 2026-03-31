@@ -18,9 +18,9 @@ class ListController extends Controller
 
         // 2. Tenta autenticar
         if (Auth::attempt($credenciais)) {
-            // Se der certoo, limpa a sessão e vai para a home
             $request->session()->regenerate();
-            return redirect()->route('home');
+            // Tenta levar para onde ele queria ir, ou para a home por padrão
+            return redirect()->intended('home'); 
         }
         return redirect()->back()->with('erro', 'E-mail ou senha inválidos');
 

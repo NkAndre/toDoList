@@ -3,37 +3,28 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ListController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
-// 1. Redirecionamento Inicial
+// 1. ROTAS ABERTAS (Quem não está logado vê isso)
 Route::get('/', function () {
     return redirect()->route('login');
 });
 
-// 2. Rotas de Autenticação (Login e Logout)
 Route::get('/login', function () {
-    return view('welcome');
+    return view('welcome'); // Sua view de login
 })->name('login');
 
 Route::post('/login/auth', [ListController::class, 'login'])->name('login.auth');
 
 
-Route::post('/logout', [ListController::class, 'logout'])->name('logout');
+// 2. ROTAS PROTEGIDAS (Middleware impede o acesso pela URL se não estiver logado)
+Route::middleware(['auth'])->group(function () {
+    
+    Route::post('/logout', [ListController::class, 'logout'])->name('logout');
+    
+    Route::get('/home', [ListController::class, 'index'])->name('home');
+    Route::get('/status', [ListController::class, 'indexStatus'])->name('status.index');
 
-Route::get('/home', [ListController::class, 'index'])->name('home');
-
-
-Route::get('/status', [ListController::class, 'indexStatus'])->name('status.index');
-
-
-Route::post('/tarefa/adicionar', [ListController::class, 'store'])->name('tarefa.store');
-
-Route::delete('/tarefa/{id}', [ListController::class, 'destroy'])->name('tarefa.destroy');
-
-Route::put('/tarefa/{id}', [ListController::class, 'update'])->name('tarefa.update');
-
-Route::post('/tarefa', [ListController::class, 'store']);
+    // CRUD de Tarefas (Protegidas)
+    Route::post('/tarefa/adicionar', [ListController::class, 'store'])->name('tarefa.store');
+    Route::delete('/tarefa/{id}', [ListController::class, 'destroy'])->name('tarefa.destroy');
+    Route::put('/tarefa/{id}', [ListController::class, 'update'])->name('tarefa.update');
+});
