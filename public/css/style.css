@@ -293,7 +293,11 @@ body {
 }
 .label-date{
     font-weight: bold;
+    gap: 10px;
 }
+.labeis{
+    gap:2rem}
+
 
 
 

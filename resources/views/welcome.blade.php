@@ -12,14 +12,20 @@
     @csrf
         <input type="email" name="email" required placeholder="E-mail">
         <input type="password" name="password" required placeholder="Senha">
-        <button type="submit">Entrdar</button>
+        <button type="submit">Entrarr</button>
+        
+    <!--mensagem caso o usuario colocar email ou senha invalido -->
         @if(session('erro'))
+
+
         <div style="background-color: #fee2e2; color: #dc2626; 
         padding: 10px; border-radius: 8px; text-align: center; font-size: 0.875rem; 
         border: 1px solid #fecaca;">
+
         {{ session('erro') }}
         </div>
-        @endif
+
+        @endif <!-- encerra aqui -->
     </form> 
     </div>
 

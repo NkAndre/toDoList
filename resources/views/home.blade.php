@@ -53,13 +53,13 @@
                     @endforeach
                 </select>
 
-                <div>
+                <div class="labeis">
                     <label class="label-date">Data de Criação</label>
                     <input type="date" name="dataCriacao" required>
                 </div>
 
                 <div>
-                    <label clas="label-date">Data de Prazo</label>
+                    <label class="label-date">Data de Prazo</label>
                     <input class="date" type="date" name="prazo" required>
                 </div>
 
@@ -85,6 +85,7 @@
                         <details class="edit-details">
                             <summary style="list-style: none; cursor: pointer;">📝</summary>
                             <div class="edit-popover">
+
                                 <form action="{{ route('tarefa.update', $t->id) }}" method="POST" class="forms">
                                     @csrf
                                     @method('PUT')
@@ -94,6 +95,7 @@
                                         <option value="{{ $s->id }}" {{ $t->status_id == $s->id ? 'selected' : '' }}>
                                             {{ $s->valor }}
                                         </option>
+
                                         @endforeach
                                     </select>
                                     <input type="date" name="prazo" value="{{ $t->prazo }}" required>
@@ -113,7 +115,7 @@
             @endforeach
         </ul>
 
-        <!-- end é aquigit -->
+        <!-- end é aqui git, ué git? entao ta KKKKKKKKKKKKK-->
     </div>
 
 </body>
