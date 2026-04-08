@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\listController;
+use App\Http\Controllers\Api\CadastroController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,3 +30,10 @@ Route::put('/tarefas/{id}', [ListController::class, 'updateApi']);
 
 //rota de API no metodo delete
 Route::delete('/tarefas/{id}', [ListController::class, 'destroyApi']);
+
+
+//APIs do app cuidaFacil-react native
+Route::post('/cadastro', [CadastroController::class, 'store']);
+
+//caso a rota se batem
+Route::post('/login', [CadastroController::class, 'login']);
