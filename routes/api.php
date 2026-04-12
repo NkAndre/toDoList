@@ -32,8 +32,3 @@ Route::put('/tarefas/{id}', [ListController::class, 'updateApi']);
 Route::delete('/tarefas/{id}', [ListController::class, 'destroyApi']);
 
 
-//APIs do app cuidaFacil-react native
-Route::post('/cadastro', [CadastroController::class, 'store']);
-
-//caso a rota se batem
-Route::post('/login', [CadastroController::class, 'login']);
