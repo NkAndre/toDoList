@@ -4,7 +4,7 @@ export default function ListaTarefas() {
     const [tarefas, setTarefas] = useState([]);
 
     useEffect(() => {
-        // Chamada para a rota que você criou no api.php
+        // Chamada para a rota que  noiss criou no api.php
         fetch('/api/tarefas')
             .then(response => response.json())
             .then(json => {
