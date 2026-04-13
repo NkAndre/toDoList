@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Status das Tarefas</title>
     <link rel="stylesheet" href="{{ url('css/style.css') }}">
     <script src="{{ asset('js/script.js') }}" defer></script>
+    @viteReactRefresh
+    @vite(['resources/js/app.jsx', 'resources/css/app.css'])
 </head>
+
 <body>
     <header class="navbar">
         <div class="logo">Gerenciador de Tarefas-todoList</div>
         <nav>
             <a href="{{ route('home') }}">Home</a>
             <a href="/status">Status</a>
-            
+
             @auth
                 <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                     @csrf
@@ -37,14 +41,15 @@
                     <tr>
                         <th>Tarefa</th>
                         <th>Status</th>
+                        <div id="react-root"></div>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($tarefasComStatus as $t)
-                    <tr>
-                        <td>{{ $t->tituloTarefa }}</td>
-                        <td><span class="status-badge">{{ $t->valor }}</span></td>
-                    </tr>
+                        <tr>
+                            <td>{{ $t->tituloTarefa }}</td>
+                            <td><span class="status-badge">{{ $t->valor }}</span></td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -57,4 +62,5 @@
         </div>
     </div>
 </body>
+
 </html>
