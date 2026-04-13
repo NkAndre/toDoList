@@ -34,33 +34,41 @@
     <button id="themeBtn">🌙</button>
 
     <div class="box status-box">
-        <h2>Minhas Tarefas por Status</h2>
-        <div class="table-container">
-            <table class="status-table">
-                <thead>
-                    <tr>
-                        <th>Tarefa</th>
-                        <th>Status</th>
-                        <div id="react-root"></div>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($tarefasComStatus as $t)
-                        <tr>
-                            <td>{{ $t->tituloTarefa }}</td>
-                            <td><span class="status-badge">{{ $t->valor }}</span></td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <h2>Minhas Tarefas (React)</h2>
+        
+        {{-- O React renderiza a tabela completa aqui dentro --}}
+        <div id="react-root"></div>
 
-            @if($tarefasComStatus->isEmpty())
-                <p style="text-align: center; margin-top: 20px; color: var(--text-main);">
-                    Nenhuma tarefa encontrada para o seu usuário.
-                </p>
-            @endif
-        </div>
+        {{-- 
+            CODIGO ANTIGO (finally bro)
+            Abaixo estava a estrutura antiga que o Blade preenchia.
+            Agora o React faz o fetch na API e monta isso dinamicamente.
+
+            <div class="table-container">
+                <table class="status-table">
+                    <thead>
+                        <tr>
+                            <th>Tarefa</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($tarefasComStatus as $t)
+                            <tr>
+                                <td>{{ $t->tituloTarefa }}</td>
+                                <td><span class="status-badge">{{ $t->valor }}</span></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+                @if($tarefasComStatus->isEmpty())
+                    <p style="text-align: center; margin-top: 20px; color: var(--text-main);">
+                        Nenhuma tarefa encontrada para o seu usuário.
+                    </p>
+                @endif
+            </div> 
+        --}}
     </div>
 </body>
-
 </html>
