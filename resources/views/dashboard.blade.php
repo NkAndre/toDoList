@@ -37,10 +37,37 @@
 
     <button id="themeBtn">🌙</button>
     <div class="estatisticas">
-        <h2>Gerenciador de tarefas ({{ $total }})</h2>
-        <h3>Total de Tarefas: {{ $total }}</h3>
-    </div>
+        <h2>Minhas Tarefas 
+              @auth
+            | user: {{ Auth::user()->name }}
+            @endauth
+        </h2>
 
+        <div class="dashboard-grid" 
+        style="display: flex; gap: 20px; flex-wrap: wrap; color:blue;">
+            <div class="card">
+                <h3>Total</h3>
+                <p>{{ $total }}</p>
+            </div>
+
+
+            <div class="card" style="color: orange
+            ;">
+                <h3>Pendentes</h3>
+                <p>{{ $pendentes }}</p> 
+            </div>
+
+            <div class="card" style="color: green;">
+                <h3>Concluídas</h3>
+                <p>{{ $concluidas }}</p>
+            </div>
+
+            <div class="card" style="color: red;">
+                <h3>Atrasadas</h3>
+                <p>{{ $atrasadas }}</p>
+            </div>
+        </div>
+    </div>
 
 
 

@@ -40,7 +40,7 @@ class ListController extends Controller
     /**
      * Listagem de Tarefas (Web)
      */
-    public function index()
+    /** public function index()
     {   
         $statusItem = statusModel::all(); 
 
@@ -50,7 +50,83 @@ class ListController extends Controller
                     ->get(); 
         
         return view('home', compact('tarefas', 'statusItem'));
-    }
+    }*/
+
+        public function index()
+{   
+    $statusItem = statusModel::all(); 
+    
+    // Consulta 1: Filtro simples com Eloquent
+    $tarefas = ListModel::where('user_id', Auth::id())->get(); 
+    
+    return view('home', compact('tarefas', 'statusItem'));
+}
+
+public function tarefasUrgentes()
+{
+    // Consulta 2: Filtro com AND 
+    $tarefas = ListModel::where([
+        ['user_id', '=', Auth::id()],
+        ['status_id', '=', 1],
+        ['prazo', '<=', now()]
+    ])->get();
+
+    return view('urgentes', compact('tarefas'));
+}
+
+public function buscarPrioridades()
+{
+    // Consulta 3: Uso de orWhere
+    $tarefas = ListModel::where('user_id', Auth::id())
+        ->where('tituloTarefa', 'like', '%Estudar%')
+        ->orWhere('tituloTarefa', 'like', '%Trabalhar%')
+        ->get();
+
+    return view('home', compact('tarefas'));
+}
+
+public function tarefasDoMes()
+{
+    // Consulta 4: Filtro de data e ordenação
+    $tarefas = ListModel::where('user_id', Auth::id())
+        ->whereMonth('dataCriacao', date('m'))
+        ->orderBy('dataCriacao', 'desc')
+        ->get();
+
+    return view('home', compact('tarefas'));
+}
+
+
+public function dashboard()
+{
+    $userId = Auth::id();
+    
+    // Total de tarefas
+    $total = ListModel::where('user_id', $userId)->count();
+
+    // Tarefas Pendent
+    $pendentes = ListModel::where('user_id', $userId)
+                          ->where('status_id', 1) 
+                          ->count();
+
+    // Tarefas Concluídasss
+    $concluidas = ListModel::where('user_id', $userId)
+                           ->where('status_id', 3)
+                           ->count();
+
+    // Tarefas Atrasadsdas (Prazo menor que hoje e não concluídas)
+    $atrasadas = ListModel::where('user_id', $userId)
+                          ->where('prazo', '<', now()->format('Y-m-d'))
+                          ->where('status_id', '!=', 3)
+                          ->count();
+
+
+    return view('dashboard', compact('total', 'pendentes', 'concluidas', 'atrasadas'));
+}
+
+
+
+    
 
     /**
      * API: Listar todas as tarefas
@@ -167,14 +243,6 @@ class ListController extends Controller
     return \Illuminate\Support\Facades\DB::table('tabela_item')
             ->where('user_id', \Illuminate\Support\Facades\Auth::id())
             ->count();
-}
-
-public function dashboard()
-{
-    // Buscamos o total aqui para passar para a view
-    $total = $this->countTarefas(); 
-
-    return view('dashboard', compact('total'));
 }
 
 
