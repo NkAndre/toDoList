@@ -13,7 +13,7 @@
     @csrf
         <input type="email" name="email" required placeholder="E-mail">
         <input type="password" name="password" required placeholder="Senha">
-        <button type="submit">Entrarr</button>
+        <button type="submit">Entrar</button>
         
     <!--mensagem caso o usuario colocar email ou senha invalido -->
         @if(session('erro'))
