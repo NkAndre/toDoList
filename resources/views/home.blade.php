@@ -21,6 +21,7 @@
 
         <nav>
             <a href="{{ route('home') }}">Home</a>
+             <a href="{{ route('dashboard') }}">dashboard</a>
             <a href="{{ route('status.index') }}">Status</a>
 
             @auth

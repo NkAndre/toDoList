@@ -11,6 +11,6 @@ export default defineConfig({
             ],
             refresh: true,
         }),
-        react(), // Ativamos o plugin do React aqui
+        react(), 
     ],
 });

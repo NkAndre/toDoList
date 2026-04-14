@@ -7,7 +7,7 @@ const StatusTable = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('/api/tarefas') // rota no api.php
+        fetch('/api/tarefas') // rota no api.php brow
             .then(response => response.json())
             .then(data => {
                 setTarefas(data.data);

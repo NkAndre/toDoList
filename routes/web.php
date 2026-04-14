@@ -12,6 +12,11 @@ Route::get('/login', function () {
     return view('welcome'); // Sua view de login
 })->name('login');
 
+
+Route::get('/dashboard', [ListController::class, 'dashboard'])->name('dashboard');
+
+
+
 Route::post('/login/auth', [ListController::class, 'login'])->name('login.auth');
 
 

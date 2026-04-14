@@ -161,6 +161,24 @@ class ListController extends Controller
         return view('status', compact('tarefasComStatus'));
     }
 
+    public static function countTarefas()
+{
+    // Conta as tarefas do usuário logado
+    return \Illuminate\Support\Facades\DB::table('tabela_item')
+            ->where('user_id', \Illuminate\Support\Facades\Auth::id())
+            ->count();
+}
+
+public function dashboard()
+{
+    // Buscamos o total aqui para passar para a view
+    $total = $this->countTarefas(); 
+
+    return view('dashboard', compact('total'));
+}
+
+
+
     /**
      * API: Atualizar tarefa
      */

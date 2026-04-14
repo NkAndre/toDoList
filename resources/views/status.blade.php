@@ -17,6 +17,7 @@
         <nav>
             <a href="{{ route('home') }}">Home</a>
             <a href="/status">Status</a>
+             <a href="/dashboard">Dashboard</a>
 
             @auth
                 <form action="{{ route('logout') }}" method="POST" style="display: inline;">
@@ -41,7 +42,7 @@
 
         {{-- 
             CODIGO ANTIGO (finally bro)
-            Abaixo estava a estrutura antiga que o Blade preenchia.
+            abaixo ta o cod blade
             Agora o React faz o fetch na API e monta isso dinamicamente.
 
             <div class="table-container">
