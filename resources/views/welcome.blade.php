@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="box-forms">
+         <img src="{{url('assets/imgLogin.png')}}" alt="imagem de login">
     <form action="{{ route('login.auth') }}" method="POST">
     @csrf
         <input type="email" name="email" required placeholder="E-mail">
