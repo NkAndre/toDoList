@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="{{url('css/style.css')}}">
     <script src="{{ asset('js/script.js') }}" defer></script>
     <title></title>
+
+        @viteReactRefresh
+    @vite(['resources/js/app.jsx', 'resources/css/app.css'])
 </head>
 
 <body>
@@ -36,37 +39,16 @@
     </header>
 
     <button id="themeBtn">🌙</button>
-    <div class="estatisticas">
-        <h2>Minhas Tarefas 
-              @auth
-            | user: {{ Auth::user()->name }}
-            @endauth
-        </h2>
 
-        <div class="dashboard-grid" 
-        style="display: flex; gap: 20px; flex-wrap: wrap; color:blue;">
-            <div class="card">
-                <h3>Total</h3>
-                <p>{{ $total }}</p>
-            </div>
-
-
-            <div class="card" style="color: orange
-            ;">
-                <h3>Pendentes</h3>
-                <p>{{ $pendentes }}</p> 
-            </div>
-
-            <div class="card" style="color: green;">
-                <h3>Concluídas</h3>
-                <p>{{ $concluidas }}</p>
-            </div>
-
-            <div class="card" style="color: red;">
-                <h3>Atrasadas</h3>
-                <p>{{ $atrasadas }}</p>
-            </div>
-        </div>
+    <div id="dashboard-root" 
+        data-user="{{ Auth::user()->name ?? '' }}"
+        data-total="{{ $total }}"
+        data-pendentes="{{ $pendentes }}"
+        data-concluidas="{{ $concluidas }}"
+        data-atrasadas="{{ $atrasadas }}">
+        {{-- O React vai renderizar tudo aqui dentro --}}
+    </div>
+       
     </div>
 
 
