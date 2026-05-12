@@ -1,27 +1,47 @@
 import React from 'react';
-import './Dashboard.css'; // Vamos criar esse arquivo abaixo
+import { ListTodo, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import './Dashboard.css';
 
-const StatCard = ({ title, value, type }) => (
-    <div className={`card card-${type}`}>
-        <h3>{title}</h3>
-        <p>{value}</p>
+const StatCard = ({ title, value, type, icon: Icon }) => (
+    <div className={`stat-card card-${type}`}>
+        <div className="stat-content">
+            <div className="stat-text">
+                <span className="stat-title">{title}</span>
+                <h2 className="stat-value">{value}</h2>
+            </div>
+            <div className="stat-icon-wrapper">
+                <Icon size={24} />
+            </div>
+        </div>
     </div>
 );
 
 const Dashboard = ({ user, total, pendentes, concluidas, atrasadas }) => {
     return (
-        <div className="dashboard-container">
-            <header className="dashboard-header">
-                <h2>Minhas Tarefas</h2>
-                <span className="user-badge">Usuário: <strong>{user}</strong></span>
-            </header>
+        <div className="dashboard-wrapper">
+            <main className="main-content">
+                <header className="top-header">
+                    <div className="header-info">
+                        <h1>Dashboard de Tarefas</h1>
+                        <p>Bem-vindo de volta, <strong>{user}</strong></p>
+                    </div>
+                    <div className="date-display">
+                        {new Date().toLocaleDateString('pt-BR')}
+                    </div>
+                </header>
 
-            <div className="dashboard-grid">
-                <StatCard title="Total" value={total} type="total" />
-                <StatCard title="Pendentes" value={pendentes} type="pending" />
-                <StatCard title="Concluídas" value={concluidas} type="completed" />
-                <StatCard title="Atrasadas" value={atrasadas} type="delayed" />
-            </div>
+                <div className="stats-grid">
+                    <StatCard title="Total de Tarefas" value={total} type="total" icon={ListTodo} />
+                    <StatCard title="Tarefas Pendentes" value={pendentes} type="pending" icon={Clock} />
+                    <StatCard title="Concluídas" value={concluidas} type="completed" icon={CheckCircle} />
+                    <StatCard title="Atrasadas" value={atrasadas} type="delayed" icon={AlertCircle} />
+                </div>
+
+                <div className="content-placeholder">
+                    <div className="chart-box">Resumo de Atividade (Gráfico)</div>
+                    <div className="list-box">Últimas Atualizações</div>
+                </div>
+            </main>
         </div>
     );
 };
