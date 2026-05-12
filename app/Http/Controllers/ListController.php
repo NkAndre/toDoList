@@ -15,7 +15,7 @@ class ListController extends Controller
      */
     public function login(Request $request)
     {
-        // Pega apenas e-mail e password (campos padrão do ToDoList)
+        
         $credenciais = $request->only('email', 'password');
 
         if (Auth::attempt($credenciais)) {
@@ -76,7 +76,7 @@ public function tarefasUrgentes()
 
 public function buscarPrioridades()
 {
-    // Consulta 3: Uso de orWhere
+    // consulta 3: uso de orWhere
     $tarefas = ListModel::where('user_id', Auth::id())
         ->where('tituloTarefa', 'like', '%Estudar%')
         ->orWhere('tituloTarefa', 'like', '%Trabalhar%')

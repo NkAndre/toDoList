@@ -32,10 +32,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public $timestamps = true; // Geralmente ToDoList usa timestamps (created_at/updated_at)
+    public $timestamps = true; 
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed', // Garante que o Laravel lide bem com a criptografia
+        'password' => 'hashed', 
     ];
 }
