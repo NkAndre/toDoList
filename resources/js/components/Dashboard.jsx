@@ -1,7 +1,7 @@
-import React from 'react';
-import { ListTodo, CheckCircle, Clock, AlertCircle } from 'lucide-react';
-import ReactECharts from 'echarts-for-react'; // 1. Importa o componente do gráfico
-import './Dashboard.css';
+import React from "react";
+import { ListTodo, CheckCircle, Clock, AlertCircle } from "lucide-react";
+import ReactECharts from "echarts-for-react";
+import "./Dashboard.css";
 
 const StatCard = ({ title, value, type, icon: Icon }) => (
     <div className={`stat-card card-${type}`}>
@@ -18,57 +18,109 @@ const StatCard = ({ title, value, type, icon: Icon }) => (
 );
 
 const Dashboard = ({ user, total, pendentes, concluidas, atrasadas }) => {
-    
-  
     const chartOption = {
         tooltip: {
-            trigger: 'axis',
-            axisPointer: { type: 'shadow' }
+            trigger: "axis",
+            axisPointer: { type: "shadow" },
         },
         grid: {
-            top: '10%',
-            left: '5%',
-            right: '5%',
-            bottom: '10%',
-            containLabel: true
+            top: "10%",
+            left: "5%",
+            right: "5%",
+            bottom: "10%",
+            containLabel: true,
         },
         xAxis: {
-            type: 'category',
-        
-            data: ['Pendentes', 'Concluídas', 'Atrasadas'],
+            type: "category",
+
+            data: ["pendentes", "concluídas", "atrasadas"],
             axisLabel: {
-                color: '#666'
-            }
+                color: "#666",
+            },
         },
         yAxis: {
-            type: 'value',
-            minInterval: 1, 
+            type: "value",
+            minInterval: 1,
             axisLabel: {
-                color: '#666'
-            }
+                color: "#666",
+            },
         },
         series: [
             {
-                
                 data: [
                     {
                         value: pendentes,
-                        itemStyle: { color: '#f59e0b' } // cor customizada (ex: Amarelo)
+                        itemStyle: { color: "#f59e0b" }, // cor  Amarelo
                     },
                     {
                         value: concluidas,
-                        itemStyle: { color: '#10b981' } // Cor customizada (ex: Verde)
+                        itemStyle: { color: "#10b981" }, // Cor  Verde
                     },
                     {
                         value: atrasadas,
-                        itemStyle: { color: '#ef4444' } 
-                    }
+                        itemStyle: { color: "#ef4444" },
+                    },
                 ],
-                type: 'bar',
-                barWidth: '50%', 
-                borderRadius: [4, 4, 0, 0] 
-            }
-        ]
+                type: "bar",
+                barWidth: "50%",
+                borderRadius: [4, 4, 0, 0],
+            },
+        ],
+    };
+    const pieChartOption = {
+        tooltip: {
+            trigger: "item",
+            formatter: "{b}: <strong>{c}</strong> ({d}%)",
+        },
+        legend: {
+            bottom: "0%", 
+            left: "center",
+            textStyle: { color: "#64748b" },
+        },
+        series: [
+            {
+                name: "Status das Tarefas",
+                type: "pie",
+                radius: ["40%", "70%"],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 6,
+                    borderColor: "#fff",
+                    borderWidth: 2,
+                },
+                label: {
+                    show: false,
+                    position: "center",
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 18,
+                        fontWeight: "bold",
+                    },
+                },
+                labelLine: {
+                    show: false,
+                },
+                data: [
+                    {
+                        value: pendentes,
+                        name: "Pendentes",
+                        itemStyle: { color: "#f59e0b" },
+                    },
+                    {
+                        value: concluidas,
+                        name: "Concluídas",
+                        itemStyle: { color: "#10b981" },
+                    },
+                    {
+                        value: atrasadas,
+                        name: "Atrasadas",
+                        itemStyle: { color: "#ef4444" },
+                    },
+                ],
+            },
+        ],
     };
 
     return (
@@ -77,33 +129,56 @@ const Dashboard = ({ user, total, pendentes, concluidas, atrasadas }) => {
                 <header className="top-header">
                     <div className="header-info">
                         <h1>Dashboard de Tarefas</h1>
-                        <p>Bem-vindo de volta, <strong>{user}</strong></p>
+                        <p>
+                            Bem-vindo de volta, <strong>{user}</strong>
+                        </p>
                     </div>
                     <div className="date-display">
-                        {new Date().toLocaleDateString('pt-BR')}
+                        {new Date().toLocaleDateString("pt-BR")}
                     </div>
                 </header>
 
                 <div className="stats-grid">
-                    <StatCard title="Total de Tarefas" value={total} type="total" icon={ListTodo} />
-                    <StatCard title="Tarefas Pendentes" value={pendentes} type="pending" icon={Clock} />
-                    <StatCard title="Concluídas" value={concluidas} type="completed" icon={CheckCircle} />
-                    <StatCard title="Atrasadas" value={atrasadas} type="delayed" icon={AlertCircle} />
+                    <StatCard
+                        title="Total de Tarefas"
+                        value={total}
+                        type="total"
+                        icon={ListTodo}
+                    />
+                    <StatCard
+                        title="Tarefas Pendentes"
+                        value={pendentes}
+                        type="pending"
+                        icon={Clock}
+                    />
+                    <StatCard
+                        title="Concluídas"
+                        value={concluidas}
+                        type="completed"
+                        icon={CheckCircle}
+                    />
+                    <StatCard
+                        title="Atrasadas"
+                        value={atrasadas}
+                        type="delayed"
+                        icon={AlertCircle}
+                    />
                 </div>
 
                 <div className="content-placeholder">
                     <div className="chart-box">
                         <h3>Resumo de Atividade</h3>
-                       
-                        <ReactECharts 
-                            option={chartOption} 
-                            style={{ height: '300px', width: '100%' }} 
+
+                        <ReactECharts
+                            option={chartOption}
+                            style={{ height: "300px", width: "100%" }}
                         />
                     </div>
-                    <div className="list-box">Últimas Atualizações
-                    <ReactECharts 
-                            option={chartOption} 
-                            style={{ height: '300px', width: '100%' }} 
+                    <div className="chart-box">
+                        Últimas Atualizações
+                        <ReactECharts
+                            option={pieChartOption}
+                            style={{ height: "300px", width: "100%" }}
                         />
                     </div>
                 </div>

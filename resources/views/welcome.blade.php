@@ -9,7 +9,7 @@
 <body>
     <div class="box-forms">
         <div class="login-banner">
-            <img src="{{url('assets/imagem-login.jpg')}}" alt="imagem de login">
+            <img src="{{url('assets/imagem-login.jpg')}}"  alt="imagem de login">
         </div>
 
         <div class="login-section">
