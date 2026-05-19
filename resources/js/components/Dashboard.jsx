@@ -19,7 +19,7 @@ const StatCard = ({ title, value, type, icon: Icon }) => (
 
 const Dashboard = ({ user, total, pendentes, concluidas, atrasadas }) => {
     
-    // 2. Define a configuração do gráfico adaptada para os seus dados
+  
     const chartOption = {
         tooltip: {
             trigger: 'axis',
@@ -34,7 +34,7 @@ const Dashboard = ({ user, total, pendentes, concluidas, atrasadas }) => {
         },
         xAxis: {
             type: 'category',
-            // Substituímos os dias da semana pelos status das tarefas
+        
             data: ['Pendentes', 'Concluídas', 'Atrasadas'],
             axisLabel: {
                 color: '#666'
@@ -42,18 +42,18 @@ const Dashboard = ({ user, total, pendentes, concluidas, atrasadas }) => {
         },
         yAxis: {
             type: 'value',
-            minInterval: 1, // Garante que o gráfico use números inteiros na escala
+            minInterval: 1, 
             axisLabel: {
                 color: '#666'
             }
         },
         series: [
             {
-                // Inserimos os valores reais que o componente recebe via props
+                
                 data: [
                     {
                         value: pendentes,
-                        itemStyle: { color: '#f59e0b' } // Cor customizada (ex: Amarelo)
+                        itemStyle: { color: '#f59e0b' } // cor customizada (ex: Amarelo)
                     },
                     {
                         value: concluidas,
@@ -61,11 +61,11 @@ const Dashboard = ({ user, total, pendentes, concluidas, atrasadas }) => {
                     },
                     {
                         value: atrasadas,
-                        itemStyle: { color: '#ef4444' } // Cor customizada (ex: Vermelho)
+                        itemStyle: { color: '#ef4444' } 
                     }
                 ],
                 type: 'bar',
-                barWidth: '50%', // Ajusta a largura das barras
+                barWidth: '50%', 
                 borderRadius: [4, 4, 0, 0] 
             }
         ]

@@ -82,13 +82,13 @@
     justify-content: center;
 }
 
-/* Cores específicas dos ícones/cards */
+
 .card-total .stat-icon-wrapper { background: #dbeafe; color: #2563eb; }
 .card-pending .stat-icon-wrapper { background: #fef3c7; color: #d97706; }
 .card-completed .stat-icon-wrapper { background: #dcfce7; color: #16a34a; }
 .card-delayed .stat-icon-wrapper { background: #fee2e2; color: #dc2626; }
 
-/* placeholder para o resto da dashboard */
+
 .content-placeholder {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -111,27 +111,27 @@
 /* CONTAINER DOS GRÁFICOS/LISTAS */
 .content-placeholder {
     display: grid;
-    /* Mantém 2 colunas no desktop (Gráfico maior, Lista menor) */
+  
     grid-template-columns: 2fr 1fr; 
     gap: 25px;
 }
 
 .chart-box, .list-box {
     background: var(--white);
-    min-height: 380px; /* Mudamos para min-height para dar mais espaço ao gráfico */
-    width: 100%;       /* IMPORTANTE: Remove os 250px e deixa ocupar o espaço do Grid */
+    min-height: 380px;
+    width: 100%;      
     border-radius: 12px;
     border: 1px solid #e2e8f0;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-    padding: 20px;     /* Espaçamento interno para os títulos e gráficos não colarem nas bordas */
+    padding: 20px;      
     box-sizing: border-box;
 }
 
-/* Customização interna da caixa do gráfico */
+
 .chart-box {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Alinha o título "Resumo de Atividade" à esquerda */
+    align-items: flex-start; 
     justify-content: flex-start;
 }
 
@@ -141,7 +141,7 @@
     margin-bottom: 15px;
 }
 
-/* Responsividade: Em telas menores (celulares/tablets), vira uma coluna só */
+/* Responsividade*/
 @media (max-width: 900px) {
     .content-placeholder {
         grid-template-columns: 1fr;
