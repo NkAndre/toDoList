@@ -1,5 +1,6 @@
 import React from 'react';
 import { ListTodo, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import ReactECharts from 'echarts-for-react'; // 1. Importa o componente do gráfico
 import './Dashboard.css';
 
 const StatCard = ({ title, value, type, icon: Icon }) => (
@@ -17,6 +18,59 @@ const StatCard = ({ title, value, type, icon: Icon }) => (
 );
 
 const Dashboard = ({ user, total, pendentes, concluidas, atrasadas }) => {
+    
+    // 2. Define a configuração do gráfico adaptada para os seus dados
+    const chartOption = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { type: 'shadow' }
+        },
+        grid: {
+            top: '10%',
+            left: '5%',
+            right: '5%',
+            bottom: '10%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            // Substituímos os dias da semana pelos status das tarefas
+            data: ['Pendentes', 'Concluídas', 'Atrasadas'],
+            axisLabel: {
+                color: '#666'
+            }
+        },
+        yAxis: {
+            type: 'value',
+            minInterval: 1, // Garante que o gráfico use números inteiros na escala
+            axisLabel: {
+                color: '#666'
+            }
+        },
+        series: [
+            {
+                // Inserimos os valores reais que o componente recebe via props
+                data: [
+                    {
+                        value: pendentes,
+                        itemStyle: { color: '#f59e0b' } // Cor customizada (ex: Amarelo)
+                    },
+                    {
+                        value: concluidas,
+                        itemStyle: { color: '#10b981' } // Cor customizada (ex: Verde)
+                    },
+                    {
+                        value: atrasadas,
+                        itemStyle: { color: '#ef4444' } // Cor customizada (ex: Vermelho)
+                    }
+                ],
+                type: 'bar',
+                barWidth: '50%', // Ajusta a largura das barras
+                borderRadius: [4, 4, 0, 0] 
+            }
+        ]
+    };
+
     return (
         <div className="dashboard-wrapper">
             <main className="main-content">
@@ -38,8 +92,20 @@ const Dashboard = ({ user, total, pendentes, concluidas, atrasadas }) => {
                 </div>
 
                 <div className="content-placeholder">
-                    <div className="chart-box">Resumo de Atividade (Gráfico)</div>
-                    <div className="list-box">Últimas Atualizações</div>
+                    <div className="chart-box">
+                        <h3>Resumo de Atividade</h3>
+                       
+                        <ReactECharts 
+                            option={chartOption} 
+                            style={{ height: '300px', width: '100%' }} 
+                        />
+                    </div>
+                    <div className="list-box">Últimas Atualizações
+                    <ReactECharts 
+                            option={chartOption} 
+                            style={{ height: '300px', width: '100%' }} 
+                        />
+                    </div>
                 </div>
             </main>
         </div>
