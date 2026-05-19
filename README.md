@@ -11,7 +11,8 @@
 ## preview 📊
 ---
 
-<img width="1907" height="890" alt="image" src="https://github.com/user-attachments/assets/6f76a678-a1ef-4d2c-b92d-696ed5a64a56" />
+<img width="1899" height="822" alt="image" src="https://github.com/user-attachments/assets/4fa5f2ce-0e30-46a9-9922-cccdaad2e9f3" />
+
 
 
 
