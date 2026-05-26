@@ -20,6 +20,9 @@ body {
     background-color: var(--bg-page);
     padding: 20px;
 }
+.titulo{
+    color: #4f46e5;
+}
 
 .box-forms {
     background: #fff;
@@ -44,9 +47,10 @@ body {
 
 .login-banner img {
     width: 100%;
-    max-width: 500px;
+    max-width: 450px;
     height: auto;
     object-fit: contain;
+    border-radius: 20px;
 }
 
 /* Metade do Formulário */

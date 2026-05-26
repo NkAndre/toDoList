@@ -14,7 +14,7 @@
 
         <div class="login-section">
             <div class="login-header">
-                <h2>Bem-vindo</h2>
+                <h2 class="titulo">Bem-vindo</h2>
                 <p>Faça login para gerenciar suas tarefas</p>
             </div>
 
