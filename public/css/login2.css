@@ -42,7 +42,12 @@ body {
     padding: 40px;
 }
 
-
+.login-banner img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: contain;
+}
 
 /* Metade do Formulário */
 .login-section {
