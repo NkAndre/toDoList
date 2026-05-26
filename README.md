@@ -4,10 +4,10 @@
 É uma aplicação web utilizando laravel como backend e React.js para interface front-end.
 
 
-## 🛠️ Ferramnetas
+## 🛠️ Ferramentas
 <p align="left">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=laravel,mysql,react" />
+    <img src="https://skillicons.dev/icons?i=laravel,react.mysql" />
   </a>
 </p>
 
